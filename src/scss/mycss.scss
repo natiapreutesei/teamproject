@@ -1,20 +1,27 @@
-/* general CSS settings */
 /*FONTS*/
 @font-face{
-  src: url("../");
-  font-family: "robotol";
+ /* src: url("../");
+  font-family: "";*/
 }
 
+/*GLOBAL CLASSES*/
 
 
+/*VARIABLES*/
 
-/* header and navbar */
+/*FROM HERE WE WORK MOBILE ORIENTED*/
+/*BEGIN NAVBAR*/
 
+/*END NAVBAR*/
 
+/*BEGIN QUIZ*/
 
-/* quiz */
+/*END QUIZ*/
 
+/*BEGIN SCOREBOARD*/
 
+/*END SCOREBOARD*/
 
-/* Scoreboard */
-
+/*FROM HERE WE WORK DESKTOP ORIENTED W/ MEDIA QUERY'S*/
+@media (min-width: 992px){
+}
