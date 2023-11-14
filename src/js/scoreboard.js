@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const scoreDisplay = document.getElementById("scoreDisplay");
     const scoreValue = document.getElementById("scoreValue");
