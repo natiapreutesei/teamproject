@@ -1,22 +1,50 @@
 /*FUNCTION THAT READS THE NUMBER OF INPUTS GIVEN AND GENERATES THAT MANY CARDS*/
 function generateCountries() {
-    let number = document.getElementById("countryCount").value;
+    let number = parseInt(document.getElementById("countryCount").value);
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            displayCountries(data, number);
+        })
+        .catch(error => {
+            console.error('Error fetching countries:', error);
+        });
+}
 
-    let card = document.getElementById("result"); // Corrected: Use the "result" div instead of "card"
-    card.innerHTML = "";
+function displayCountries(countries, number) {
+    let resultContainer = document.getElementById("result");
+    resultContainer.innerHTML = "";
 
-    for (let i = 0; i < number; i++) { // Corrected: Change "i<=number" to "i<number"
-        let divcard = document.createElement("div");
-        divcard.className = 'col'; // Corrected: Set the class to 'col' for proper Bootstrap styling
+    for (let i = 0; i < number; i++) {
+        let randomIndex = Math.floor(Math.random() * countries.length);
+        let country = countries[randomIndex];
 
-        let innerCard = document.createElement("div");
-        innerCard.className = 'card';
+        let card = document.createElement("div");
+        card.className = 'col';
 
-        // Add your card content here, e.g., an image, title, and text
-        // innerCard.innerHTML = '<img src="..." class="card-img-top" alt="..."><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p></div>';
+        let cardInner = document.createElement("div");
+        cardInner.className = 'card';
 
-        divcard.appendChild(innerCard);
-        card.appendChild(divcard);
+        let cardImage = document.createElement("img");
+        cardImage.src = country.flags.png;
+        cardImage.className = 'card-img-top';
+        cardImage.alt = 'Flag of ' + country.name.common;
+
+        let cardBody = document.createElement("div");
+        cardBody.className = 'card-body';
+
+        let cardInput = document.createElement("input");
+        cardInput.className = 'card-title';
+
+        cardBody.appendChild(cardInput);
+        cardInner.appendChild(cardImage);
+        cardInner.appendChild(cardBody);
+        card.appendChild(cardInner);
+        resultContainer.appendChild(card);
     }
 }
 
+document.getElementById("result").addEventListener("submit", (e) => {
+    e.preventDefault();
+    generateCountries();
+});
