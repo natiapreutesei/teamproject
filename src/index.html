@@ -7,6 +7,55 @@
     <script type="module" src="./js/main.js"></script>
 </head>
 <body>
-    <div id="example"></div>
+<div id="example"></div>
+<!--QUIZ--> <!--THIS IS JUST FOR TESTING AND MUST BE DELETED BEFORE PUSHING/MERGING-->
+<!--THIS IS JUST FOR TESTING AND MUST BE DELETED BEFORE PUSHING/MERGING-->
+<!--THIS IS JUST FOR TESTING AND MUST BE DELETED BEFORE PUSHING/MERGING-->
+<!--THIS IS JUST FOR TESTING AND MUST BE DELETED BEFORE PUSHING/MERGING-->
+<!--THIS IS JUST FOR TESTING AND MUST BE DELETED BEFORE PUSHING/MERGING-->
+<!--THIS IS JUST FOR TESTING AND MUST BE DELETED BEFORE PUSHING/MERGING-->
+<main id="quiz">
+    <div class="container mt-5">
+        <form id="countryForm">
+            <div class="form-group">
+                <label for="countryCount">How many countries do you want to see?</label>
+                <input type="text" class="form-control" id="countryCount" placeholder="Enter a number">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="generateCountries()">Generate</button>
+        </form>
+        <div id="result" class="mt-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4 col-lg-8 offset-2 mt-5">
+                <div class="col">
+                    <div class="card">
+                        <!--<img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--DELETE TILL HERE-->
+<script>
+    function generateCountries(){
+        let number = document.getElementById("countryCount").value;
+        let card = document.getElementById("result");
+        card.innerHTML = "";
+
+        for (let i = 0; i < number; i++) {
+            let divcard = document.createElement("div");
+            divcard.className = 'col';
+
+            let innerCard = document.createElement("div");
+            innerCard.className = 'card';
+
+            divcard.appendChild(innerCard);
+            card.appendChild(divcard);
+        }
+    }
+</script>
 </body>
 </html>
