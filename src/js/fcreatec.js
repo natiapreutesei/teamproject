@@ -48,7 +48,6 @@ function displayCountries(countries, number) {
         cardTitle.textContent = `Guess:`;
 
         let cardInput = document.createElement("input");
-        cardInput.className = '';
 
         let cardButton = document.createElement("button");
         cardButton.className = 'btn btn-success';
@@ -63,16 +62,15 @@ function displayCountries(countries, number) {
         resultContainer.appendChild(card);
 
         let feedback = document.createElement("div");
-        feedback.id = `feedback-${i}`;
+        cardInput.className ="is-valid";
+        /*feedback.id = `feedback-${i}`;
         feedback.className = 'ms-2 my-auto';
-        cardBody.appendChild(feedback);
+        cardBody.appendChild(feedback);*/
         cardButton.addEventListener('click', function() {
             verifyAnswer(i, country.name.common, cardInput.value, feedback);
         });
         resultContainer.appendChild(card);
     }
-
-
 }
 
 document.getElementById("result").addEventListener("submit", (e) => {
@@ -84,8 +82,9 @@ let scorecounter = 0; // Globale score variabele
 
 function verifyAnswer(index, correctName, userInput, feedbackElement) {
     if (userInput.toLowerCase() === correctName.toLowerCase()) {
-        feedbackElement.textContent = "JUIST";
-        feedbackElement.style.color = "green";
+
+        /* feedbackElement.textContent = "JUIST";
+        feedbackElement.style.color = "green";*/
         scorecounter++; // Verhoog de score
         updateScoreboard(); // Update het scoreboard
     } else {
