@@ -26,10 +26,13 @@ function displayCountries(countries, number) {
         card.id = 'countryCard_' + i;
 
         let cardInner = document.createElement("div");
+        cardInner.style.width = "350px";
         cardInner.className = 'card m-4';
 
         let cardImage = document.createElement("img");
         cardImage.src = country.flags.png;
+        cardImage.style.height = "130px";
+        cardImage.style.width = "100%";
         cardImage.className = 'card-img-top';
         cardImage.alt = 'Flag of ' + country.name.common;
 
@@ -37,8 +40,8 @@ function displayCountries(countries, number) {
         cardBody.className = 'card-body d-flex justify-content-between';
 
         let cardTitle =  document.createElement("h5");
-        cardTitle.className = "card-title";
-        cardTitle.textContent = `${country.name.common}`;
+        cardTitle.className = "my-auto";
+        cardTitle.textContent = `Guess:`;
 
         let cardInput = document.createElement("input");
         cardInput.className = '';
@@ -55,12 +58,12 @@ function displayCountries(countries, number) {
         cardBody.appendChild(cardButton);
         resultContainer.appendChild(card);
 
-        let feedbackSpan = document.createElement("span");
-        feedbackSpan.id = `feedback-${i}`;
-        feedbackSpan.className = 'ms-2';
-        cardBody.appendChild(feedbackSpan);
+        let feedback = document.createElement("div");
+        feedback.id = `feedback-${i}`;
+        feedback.className = 'ms-2 my-auto';
+        cardBody.appendChild(feedback);
         cardButton.addEventListener('click', function() {
-            verifyAnswer(i, country.name.common, cardInput.value, feedbackSpan);
+            verifyAnswer(i, country.name.common, cardInput.value, feedback);
         });
         resultContainer.appendChild(card);
     }
@@ -73,10 +76,10 @@ document.getElementById("result").addEventListener("submit", (e) => {
 
 function verifyAnswer(index, correctName, userInput, feedbackElement) {
     if (userInput.toLowerCase() === correctName.toLowerCase()) {
-        feedbackElement.textContent = "Juist";
+        feedbackElement.textContent = "JUIST";
         feedbackElement.style.color = "green";
     } else {
-        feedbackElement.textContent = "Fout";
+        feedbackElement.textContent = "FOUT";
         feedbackElement.style.color = "red";
     }
 }

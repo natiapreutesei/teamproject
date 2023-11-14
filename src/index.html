@@ -16,8 +16,8 @@
     </nav>
 </header>
 <!--QUIZ-->
-<main id="quiz">
-    <div class="row mt-5">
+<main id="quiz" class="row">
+    <div class="mt-5">
         <div class="col-lg-8 offset-2">
             <form id="countryForm" class="d-flex flex-column align-items-center">
                 <label class="text-danger" for="countryCount">How many countries do you want to see?</label>
@@ -26,16 +26,15 @@
                     <button type="button" class="btn btn-primary ms-2" onclick="generateCountries()">Generate</button>
                 </div>
             </form>
-            <div class="mt-4">
-                <div id="result" class=" row col-lg-8 offset-2">
-                </div>
+        </div>
+        <div class="mt-4">
+            <div id="result" class=" row col-lg-8 offset-2">
             </div>
         </div>
     </div>
-</main>
-<!--SCOREBOARD-->
-<section id="scoreboard">
-        <div class="container mt-5">
+    <!--SCOREBOARD-->
+    <section id="scoreboard">
+        <div class="mt-5">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
@@ -62,6 +61,8 @@
             </div>
         </div>
     </section>
+</main>
+
 <script src="js/fcreatec.js"></script>
 </body>
 </html>
