@@ -67,8 +67,10 @@ function displayCountries(countries, number) {
         feedback.className = 'ms-2 my-auto';
         cardBody.appendChild(feedback);*/
         cardButton.addEventListener('click', function() {
-            verifyAnswer(i, country.name.common, cardInput.value, feedback);
+            verifyAnswer(i, country.name.common, cardInput.value, feedback, cardInput);
         });
+
+
         resultContainer.appendChild(card);
     }
 }
@@ -78,22 +80,34 @@ document.getElementById("result").addEventListener("submit", (e) => {
     generateCountries();
 });
 
+
+
+let totalScore = 0; // Variabele voor de totale score
+
 let scorecounter = 0; // Globale score variabele
 
-function verifyAnswer(index, correctName, userInput, feedbackElement) {
-    if (userInput.toLowerCase() === correctName.toLowerCase()) {
 
-        /* feedbackElement.textContent = "JUIST";
-        feedbackElement.style.color = "green";*/
-        scorecounter++; // Verhoog de score
-        updateScoreboard(); // Update het scoreboard
+function verifyAnswer(index, correctName, userInput, feedbackElement, inputElement) {
+    if (userInput.toLowerCase() === correctName.toLowerCase()) {
+        feedbackElement.textContent = "Juist";
+        feedbackElement.style.color = "green";
+        inputElement.style.backgroundColor = "lightgreen"; // Groene achtergrond voor correct antwoord
+        scorecounter++; // Verhoog de huidige score
+        totalScore++; // Verhoog de totale score
     } else {
         feedbackElement.textContent = "FOUT";
         feedbackElement.style.color = "red";
+        inputElement.style.backgroundColor = "salmon"; // Rode achtergrond voor fout antwoord
     }
+    updateScoreboard();
 }
 
 function updateScoreboard() {
-    const scoreDisplay = document.getElementById("score");
-    scoreDisplay.textContent = scorecounter;
+    // Werk de huidige score bij
+    document.getElementById("score").innerText = scorecounter;
+
+    // Werk de totale score bij
+    document.getElementById("totalScore").innerText = totalScore;
 }
+
+
