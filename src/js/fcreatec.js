@@ -23,7 +23,7 @@ function displayCountries(countries, number) {
         card.className = 'col';
 
         let cardInner = document.createElement("div");
-        cardInner.className = 'card';
+        cardInner.className = 'card m-4';
 
         let cardImage = document.createElement("img");
         cardImage.src = country.flags.png;
@@ -31,15 +31,23 @@ function displayCountries(countries, number) {
         cardImage.alt = 'Flag of ' + country.name.common;
 
         let cardBody = document.createElement("div");
-        cardBody.className = 'card-body';
+        cardBody.className = 'card-body d-flex justify-content-between';
+
+        let cardTitle =  document.createElement("title");
+        cardInput.textContent = `${country.name.common}`;
 
         let cardInput = document.createElement("input");
-        cardInput.className = 'card-title';
+        cardInput.className = '';
+
+        let cardButton = document.createElement("button");
+        cardButton.className = 'btn btn-success';
+        cardButton.textContent = 'Check!';
 
         cardBody.appendChild(cardInput);
         cardInner.appendChild(cardImage);
         cardInner.appendChild(cardBody);
         card.appendChild(cardInner);
+        cardBody.appendChild(cardButton);
         resultContainer.appendChild(card);
     }
 }
