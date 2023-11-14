@@ -64,8 +64,10 @@ function displayCountries(countries, number) {
         feedbackSpan.className = 'ms-2';
         cardBody.appendChild(feedbackSpan);
         cardButton.addEventListener('click', function() {
-            verifyAnswer(i, country.name.common, cardInput.value, feedbackSpan);
+            verifyAnswer(i, country.name.common, cardInput.value, feedbackSpan, cardInput);
         });
+
+
         resultContainer.appendChild(card);
     }
 
@@ -84,15 +86,17 @@ let totalScore = 0; // Variabele voor de totale score
 let scorecounter = 0; // Globale score variabele
 
 
-function verifyAnswer(index, correctName, userInput, feedbackElement) {
+function verifyAnswer(index, correctName, userInput, feedbackElement, inputElement) {
     if (userInput.toLowerCase() === correctName.toLowerCase()) {
         feedbackElement.textContent = "Juist";
         feedbackElement.style.color = "green";
+        inputElement.style.backgroundColor = "lightgreen"; // Groene achtergrond voor correct antwoord
         scorecounter++; // Verhoog de huidige score
         totalScore++; // Verhoog de totale score
     } else {
         feedbackElement.textContent = "Fout";
         feedbackElement.style.color = "red";
+        inputElement.style.backgroundColor = "salmon"; // Rode achtergrond voor fout antwoord
     }
     updateScoreboard();
 }
@@ -104,4 +108,5 @@ function updateScoreboard() {
     // Werk de totale score bij
     document.getElementById("totalScore").innerText = totalScore;
 }
+
 
