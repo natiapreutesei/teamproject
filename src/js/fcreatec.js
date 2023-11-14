@@ -33,8 +33,9 @@ function displayCountries(countries, number) {
         let cardBody = document.createElement("div");
         cardBody.className = 'card-body d-flex justify-content-between';
 
-        let cardTitle =  document.createElement("title");
-        cardInput.textContent = `${country.name.common}`;
+        let cardTitle =  document.createElement("h5");
+        cardTitle.className = "card-title";
+        cardTitle.textContent = `${country.name.common}`;
 
         let cardInput = document.createElement("input");
         cardInput.className = '';
@@ -43,6 +44,7 @@ function displayCountries(countries, number) {
         cardButton.className = 'btn btn-success';
         cardButton.textContent = 'Check!';
 
+        cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardInput);
         cardInner.appendChild(cardImage);
         cardInner.appendChild(cardBody);
