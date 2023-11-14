@@ -1,6 +1,9 @@
 /*FUNCTION THAT READS THE NUMBER OF INPUTS GIVEN AND GENERATES THAT MANY CARDS*/
 function generateCountries() {
+    scorecounter = 0; // Reset de score
+    updateScoreboard(); // Update het scoreboard
     let number = parseInt(document.getElementById("countryCount").value);
+
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
@@ -10,6 +13,7 @@ function generateCountries() {
             console.error('Error fetching countries:', error);
         });
 }
+
 
 function displayCountries(countries, number) {
     let resultContainer = document.getElementById("result");
@@ -81,4 +85,23 @@ function verifyAnswer(index, correctName, userInput, feedbackElement) {
         feedbackElement.textContent = "Fout";
         feedbackElement.style.color = "red";
     }
+}
+
+let scorecounter = 0; // Globale score variabele
+
+function verifyAnswer(index, correctName, userInput, feedbackElement) {
+    if (userInput.toLowerCase() === correctName.toLowerCase()) {
+        feedbackElement.textContent = "Juist";
+        feedbackElement.style.color = "green";
+        scorecounter++; // Verhoog de score
+        updateScoreboard(); // Update het scoreboard
+    } else {
+        feedbackElement.textContent = "Fout";
+        feedbackElement.style.color = "red";
+    }
+}
+
+function updateScoreboard() {
+    const scoreDisplay = document.getElementById("score");
+    scoreDisplay.textContent = scorecounter;
 }
