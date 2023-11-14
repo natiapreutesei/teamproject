@@ -6,24 +6,24 @@
     <title>Team Project - Rest Countries</title>
     <script src="./js/main.js" type="module"></script>
 </head>
-<body>
+<body class="container-fluid">
 <!--HEADER AND NAVBAR-->
 <header>
-    <nav id="navbar" class=" navbar bg-dark">
+    <nav id="navbar" class="navbar bg-dark">
     <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1 display-5 text-white ms-5">Flags Of The World</span>
+        <span class="navbar-brand mb-0 h1 display-5 text-white ms-5">Guess the Flag!</span>
     </div>
     </nav>
 </header>
 <!--QUIZ-->
 <main id="quiz">
-    <div class="container mt-5">
-        <form id="countryForm">
-            <div class="form-group">
-                <label for="countryCount">How many countries do you want to see?</label>
-                <input type="text" class="form-control" id="countryCount" placeholder="Enter a number">
+    <div class="row col-lg-8 offset-2 mt-5">
+        <form id="countryForm" class="d-flex flex-column align-items-center">
+            <label class="text-danger" for="countryCount">How many countries do you want to see?</label>
+            <div class="form-group mt-4 d-flex">
+                <input type="text" class="form-control w-50" id="countryCount" placeholder="Enter a number">
+                <button type="button" class="btn btn-primary ms-2" onclick="generateCountries()">Generate</button>
             </div>
-            <button type="button" class="btn btn-primary" onclick="generateCountries()">Generate</button>
         </form>
         <div class="mt-4">
             <div id="result" class=" row col-lg-8 offset-2 mt-5">

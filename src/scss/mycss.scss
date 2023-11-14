@@ -1,11 +1,22 @@
 /*FONTS*/
 @font-face{
- /* src: url("../");
-  font-family: "";*/
+ src: url("../fonts/Segoe UI Bold.woff");
+  font-family: "sogoeuib";
+}
+@font-face{
+  src: url("../fonts/Segoe UI Bold Italic.woff");
+  font-family: "sogoebi";
+}
+@font-face{
+  src: url("../fonts/Segoe UI Light.ttf");
+  font-family: "sogoel";
 }
 
 /*GLOBAL CLASSES*/
-
+body{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
 /*VARIABLES*/
 
@@ -13,9 +24,17 @@
 /*BEGIN NAVBAR*/
 
 /*END NAVBAR*/
-
+#navbar{
+  span{
+    font-family: sogoebi;
+    font-size: 40px;
+  }
+}
 /*BEGIN QUIZ*/
-
+label{
+  font-size: 30px;
+  font-family: sogoeuib;
+}
 /*END QUIZ*/
 
 /*BEGIN SCOREBOARD*/

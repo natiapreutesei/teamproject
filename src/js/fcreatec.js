@@ -23,6 +23,7 @@ function displayCountries(countries, number) {
 
         let card = document.createElement("div");
         card.className = 'col';
+        card.id = 'countryCard_' + i;
 
         let cardInner = document.createElement("div");
         cardInner.className = 'card m-4';
@@ -53,6 +54,15 @@ function displayCountries(countries, number) {
         card.appendChild(cardInner);
         cardBody.appendChild(cardButton);
         resultContainer.appendChild(card);
+
+        let feedbackSpan = document.createElement("span");
+        feedbackSpan.id = `feedback-${i}`;
+        feedbackSpan.className = 'ms-2';
+        cardBody.appendChild(feedbackSpan);
+        cardButton.addEventListener('click', function() {
+            verifyAnswer(i, country.name.common, cardInput.value, feedbackSpan);
+        });
+        resultContainer.appendChild(card);
     }
 
 
@@ -62,3 +72,13 @@ document.getElementById("result").addEventListener("submit", (e) => {
     e.preventDefault();
     generateCountries();
 });
+
+function verifyAnswer(index, correctName, userInput, feedbackElement) {
+    if (userInput.toLowerCase() === correctName.toLowerCase()) {
+        feedbackElement.textContent = "Juist";
+        feedbackElement.style.color = "green";
+    } else {
+        feedbackElement.textContent = "Fout";
+        feedbackElement.style.color = "red";
+    }
+}
