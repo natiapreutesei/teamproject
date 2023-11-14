@@ -1,33 +1,64 @@
-document.getElementById('startQuiz').addEventListener('click', startQuiz);
+// Importeer benodigde modules
+import '../scss/styles.scss';
+import * as bootstrap from 'bootstrap';
 
-function startQuiz() {
-    const aantalVragen = document.getElementById('aantalVragen').value;
-    haalVlaggenOp(aantalVragen);
+// ... andere imports en code ...
+
+export function loadCountries() {
+
+
+// Functie om landen te genereren
+export default function generateCountries(countries) {
+    let number = parseInt(document.getElementById("countryCount").value);
+    let card = document.getElementById("result");
+    card.innerHTML = "";
+
+    for (let i = 0; i < number; i++) {
+        let randomIndex = Math.floor(Math.random() * countries.length);
+        let country = countries[randomIndex];
+
+        let divcard = document.createElement("div");
+        divcard.className = 'col';
+
+        let innerCard = document.createElement("div");
+        innerCard.className = 'card';
+
+        innerCard.innerHTML = `<img src="${country.flags.png}" class="card-img-top" alt="Flag of ${country.name.common}">` +
+            `<div class="card-body"><h5 class="card-title">${country.name.common}</h5><p class="card-text">This is a card for ${country.name.common}.</p></div>`;
+
+        divcard.appendChild(innerCard);
+        card.appendChild(divcard);
+    }
 }
 
-function haalVlaggenOp(aantal) {
+export function loadCountries() {
     fetch('https://restcountries.com/v3.1/all')
         .then(response => response.json())
         .then(data => {
-            toonVlaggen(data, aantal);
+            generateCountries(data);
         })
         .catch(error => {
-            console.error('Fout bij het ophalen van de vlaggen:', error);
+            console.error('Error fetching countries:', error);
+        });
+}
+// Functie om landen van de API te laden
+function loadCountries() {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            generateCountries(data);
+        })
+        .catch(error => {
+            console.error('Error fetching countries:', error);
         });
 }
 
-function toonVlaggen(landen, aantal) {
-    const vlaggenContainer = document.getElementById('vlaggenContainer');
-    vlaggenContainer.innerHTML = ''; // Maak de container leeg
-
-    for (let i = 0; i < aantal; i++) {
-        const randomIndex = Math.floor(Math.random() * landen.length);
-        const land = landen[randomIndex];
-        const vlagElement = document.createElement('img');
-        vlagElement.src = land.flags.png;
-        vlagElement.alt = 'Vlag van ' + land.name.common;
-        vlaggenContainer.appendChild(vlagElement);
-    }
-
-    document.getElementById('quizSectie').style.display = 'block';
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            generateCountries(data);
+        })
+        .catch(error => {
+            console.error('Error fetching countries:', error);
+        });
 }
