@@ -14,10 +14,12 @@ function generateCountries() {
 function displayCountries(countries, number) {
     let resultContainer = document.getElementById("result");
     resultContainer.innerHTML = "";
+    let currentCountries = [];
 
     for (let i = 0; i < number; i++) {
         let randomIndex = Math.floor(Math.random() * countries.length);
         let country = countries[randomIndex];
+        currentCountries.push(country);
 
         let card = document.createElement("div");
         card.className = 'col';
@@ -52,6 +54,8 @@ function displayCountries(countries, number) {
         cardBody.appendChild(cardButton);
         resultContainer.appendChild(card);
     }
+
+
 }
 
 document.getElementById("result").addEventListener("submit", (e) => {
