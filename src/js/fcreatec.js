@@ -87,21 +87,26 @@ function verifyAnswer(index, correctName, userInput, feedbackElement) {
     }
 }
 
-let scorecounter = 0; // Globale score variabele
+let totalScore = 0; // Variabele voor de totale score
 
 function verifyAnswer(index, correctName, userInput, feedbackElement) {
     if (userInput.toLowerCase() === correctName.toLowerCase()) {
         feedbackElement.textContent = "Juist";
         feedbackElement.style.color = "green";
-        scorecounter++; // Verhoog de score
-        updateScoreboard(); // Update het scoreboard
+        scorecounter++; // Verhoog de huidige score
+        totalScore++; // Verhoog de totale score
     } else {
         feedbackElement.textContent = "Fout";
         feedbackElement.style.color = "red";
     }
+    updateScoreboard();
 }
 
 function updateScoreboard() {
-    const scoreDisplay = document.getElementById("score");
-    scoreDisplay.textContent = scorecounter;
+    // Werk de huidige score bij
+    document.getElementById("score").innerText = scorecounter;
+
+    // Werk de totale score bij
+    document.getElementById("totalScore").innerText = totalScore;
 }
+
