@@ -17,16 +17,18 @@
 </header>
 <!--QUIZ-->
 <main id="quiz">
-    <div class="row col-lg-8 offset-2 mt-5">
-        <form id="countryForm" class="d-flex flex-column align-items-center">
-            <label class="text-danger" for="countryCount">How many countries do you want to see?</label>
-            <div class="form-group mt-4 d-flex">
-                <input type="text" class="form-control w-50" id="countryCount" placeholder="Enter a number">
-                <button type="button" class="btn btn-primary ms-2" onclick="generateCountries()">Generate</button>
-            </div>
-        </form>
-        <div class="mt-4">
-            <div id="result" class=" row col-lg-8 offset-2 mt-5">
+    <div class="row mt-5">
+        <div class="col-lg-8 offset-2">
+            <form id="countryForm" class="d-flex flex-column align-items-center">
+                <label class="text-danger" for="countryCount">How many countries do you want to see?</label>
+                <div class="form-group mt-4 d-flex">
+                    <input type="text" class="form-control w-50" id="countryCount" placeholder="Enter a number">
+                    <button type="button" class="btn btn-primary ms-2" onclick="generateCountries()">Generate</button>
+                </div>
+            </form>
+            <div class="mt-4">
+                <div id="result" class=" row col-lg-8 offset-2">
+                </div>
             </div>
         </div>
     </div>
