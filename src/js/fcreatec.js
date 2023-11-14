@@ -21,6 +21,7 @@ function displayCountries(countries, number) {
 
         let card = document.createElement("div");
         card.className = 'col';
+        card.id = 'countryCard_' + i;
 
         let cardInner = document.createElement("div");
         cardInner.className = 'card m-4';
