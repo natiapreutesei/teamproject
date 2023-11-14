@@ -26,5 +26,3 @@ function onLoad(){
 }
 
 window.addEventListener("load",jsonLink);
-
-/*FUNCTION THAT READS THE NUMBER OF INPUTS GIVEN AND GENERATES THAT MANY CARDS*/
