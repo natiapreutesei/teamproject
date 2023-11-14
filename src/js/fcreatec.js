@@ -14,10 +14,12 @@ function generateCountries() {
 function displayCountries(countries, number) {
     let resultContainer = document.getElementById("result");
     resultContainer.innerHTML = "";
+    let currentCountries = [];
 
     for (let i = 0; i < number; i++) {
         let randomIndex = Math.floor(Math.random() * countries.length);
         let country = countries[randomIndex];
+        currentCountries.push(country);
 
         let card = document.createElement("div");
         card.className = 'col';
@@ -52,6 +54,15 @@ function displayCountries(countries, number) {
         card.appendChild(cardInner);
         cardBody.appendChild(cardButton);
         resultContainer.appendChild(card);
+
+        let feedbackSpan = document.createElement("span");
+        feedbackSpan.id = `feedback-${i}`;
+        feedbackSpan.className = 'ms-2';
+        cardBody.appendChild(feedbackSpan);
+        cardButton.addEventListener('click', function() {
+            verifyAnswer(i, country.name.common, cardInput.value, feedbackSpan);
+        });
+        resultContainer.appendChild(card);
     }
 }
 
@@ -59,3 +70,13 @@ document.getElementById("result").addEventListener("submit", (e) => {
     e.preventDefault();
     generateCountries();
 });
+
+function verifyAnswer(index, correctName, userInput, feedbackElement) {
+    if (userInput.toLowerCase() === correctName.toLowerCase()) {
+        feedbackElement.textContent = "Juist";
+        feedbackElement.style.color = "green";
+    } else {
+        feedbackElement.textContent = "Fout";
+        feedbackElement.style.color = "red";
+    }
+}
