@@ -1,7 +1,10 @@
 // Import our custom CSS
 import '../scss/styles.scss';
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a472a3b424edb82740cb4f58b3f100e46d8f0780
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
 
@@ -28,5 +31,3 @@ function onLoad(){
 }
 
 window.addEventListener("load",jsonLink);
-
-/*FUNCTION THAT READS THE NUMBER OF INPUTS GIVEN AND GENERATES THAT MANY CARDS*/

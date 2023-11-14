@@ -2,11 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Team Project - Rest Countries</title>
-    <script type="module" src="./js/main.js"></script>
+    <script src="./js/main.js" type="module"></script>
 </head>
 <body>
-    <div id="example"></div>
+<!--HEADER AND NAVBAR-->
+<header>
+    <nav id="navbar" class=" navbar bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1 display-5 text-white ms-5">Flags Of The World</span>
+    </div>
+    </nav>
+</header>
+<!--QUIZ-->
+<main id="quiz">
+    <div class="container mt-5">
+        <form id="countryForm">
+            <div class="form-group">
+                <label for="countryCount">How many countries do you want to see?</label>
+                <input type="text" class="form-control" id="countryCount" placeholder="Enter a number">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="generateCountries()">Generate</button>
+        </form>
+        <div id="result" class="mt-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4 col-lg-8 offset-2 mt-5">
+                 <div class="col">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                             <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--SCOREBOARD-->
+<section id="scoreboard">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                            <h4 class="mb-0">Scoreboard</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col" id="scoreValue">Punten</th>
+                                    <th scope="col">Maximum Punten</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td id="score">10</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
