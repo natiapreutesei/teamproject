@@ -1,9 +1,3 @@
-// Import our custom CSS
-import '../scss/styles.scss';
-
-// Import all of Bootstrap's JS
-import * as bootstrap from 'bootstrap'
-
 /*FUNCTION TO READ THE JSON AND LOAD THE ELEMENTS NEEDED FOR THE PROJECT*/
 function jsonLink(){ //connection making
     const xhr = new XMLHttpRequest();
@@ -18,7 +12,7 @@ function onLoad(){
     for (let i=0; i<country.length;i++){
         let li = document.createElement("li");
         if (country.name !== ""){
-           /!* console.log(country[i]["name"]["common"]);*!/
+           /*console.log(country[i]["name"]["common"]);*/
             li.innerHTML = country[i]["name"]["common"] + "</br>" +  country[i]["name"]["official"]+ "</br>" +  country[i]["flags"]["png"];
         }
         ul.appendChild(li);
