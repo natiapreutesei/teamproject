@@ -77,17 +77,12 @@ document.getElementById("result").addEventListener("submit", (e) => {
     generateCountries();
 });
 
-function verifyAnswer(index, correctName, userInput, feedbackElement) {
-    if (userInput.toLowerCase() === correctName.toLowerCase()) {
-        feedbackElement.textContent = "Juist";
-        feedbackElement.style.color = "green";
-    } else {
-        feedbackElement.textContent = "Fout";
-        feedbackElement.style.color = "red";
-    }
-}
+
 
 let totalScore = 0; // Variabele voor de totale score
+
+let scorecounter = 0; // Globale score variabele
+
 
 function verifyAnswer(index, correctName, userInput, feedbackElement) {
     if (userInput.toLowerCase() === correctName.toLowerCase()) {
