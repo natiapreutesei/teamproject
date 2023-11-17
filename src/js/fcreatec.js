@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function generateCountries() {
+    let welcomeText = document.getElementById('welcomeText');
+    if (welcomeText) {
+        welcomeText.style.display = 'none';
+    }
     let number = 15;
     let playerName = document.getElementById("playerName").value;
     let continent = document.getElementById("continentSelect").value;
@@ -42,16 +46,9 @@ function generateCountries() {
 }
 
 
-
-
 function validateInput(number, playerName) {
-    if (isNaN(number) || number <= 0) {
-        console.error("Invalid number of countries.");
-        return false;
-    }
-
     if (!playerName) {
-        console.error("Player name is required.");
+        alert("Naam ingeven is verplicht!");
         return false;
     }
 
@@ -77,7 +74,7 @@ function displayCountries(countries, number, playerName) {
     selectedCountries.forEach((country, i) => {
         let options = generateRandomOptions(countries, country.name.common);
         let optionsHtml = options.map((option, index) =>
-            `<div class="form-check mt-2">
+            `<div class="form-check fade-in">
                 <input  class="form-check-input " type="radio" name="countryOption_${i}" id="option_${i}_${index}" value="${option}">
                 
                 
@@ -88,11 +85,11 @@ function displayCountries(countries, number, playerName) {
 
 
         resultContainer.innerHTML += `
-        <div class="col-md-6 country-quiz" id="countryQuiz_${i}">
-            <div class="flip-card bounce-in-top flag-img ">
+        <div class="col-md-6 country-quiz col-12 col-md-6 col-lg-4 " id="countryQuiz_${i}">
+            <div class="flip-card bounce-in-top flag-img">
                 <div class="flip-card-inner jello-horizontal">
                     <div class="flip-card-front ">
-                        <img src="${country.flags.png}" class="card-img-top flag-img " alt="Flag of ${country.name.common}">
+                        <img src="${country.flags.png}" class="card-img-top flag-img center" alt="Flag of ${country.name.common}">
                     </div>
                     <div class="flip-card-back " id="backFace-${i}">
                         <p id="answerText-${i}"></p>
@@ -103,8 +100,9 @@ function displayCountries(countries, number, playerName) {
         </div>`;
     });
 
-    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary justify-content-center mt-3' +
-        ' subbtn pulse">Ben je zeker?</button>';
+    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary ' +
+        ' mt-3' +
+        ' pulse">Ben je zeker?</button>';
     document.getElementById("checkAnswersButton").addEventListener("click", () => checkAllAnswers(selectedCountries, playerName));
 }
 
