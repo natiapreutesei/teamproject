@@ -25,6 +25,8 @@ function generateCountries() {
 
     if (!validateInput(number, playerName)) return;
 
+
+
     // Reset answersSubmitted naar false bij het starten van een nieuwe spelronde
     answersSubmitted = false;
 
@@ -70,24 +72,29 @@ function displayCountries(countries, number, playerName) {
         }
     }
 
+
+
     selectedCountries.forEach((country, i) => {
         let options = generateRandomOptions(countries, country.name.common);
         let optionsHtml = options.map((option, index) =>
-            `<div class="form-check">
-                <input class="form-check-input" type="radio" name="countryOption_${i}" id="option_${i}_${index}" value="${option}">
+            `<div class="form-check mt-2">
+                <input  class="form-check-input " type="radio" name="countryOption_${i}" id="option_${i}_${index}" value="${option}">
+                
+                
                 <label class="form-check-label" for="option_${i}_${index}">
                     ${option}
                 </label>
             </div>`).join('');
 
+
         resultContainer.innerHTML += `
         <div class="col-md-6 country-quiz" id="countryQuiz_${i}">
-            <div class="flip-card bounce-in-top">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <img src="${country.flags.png}" class="card-img-top flag-img" alt="Flag of ${country.name.common}">
+            <div class="flip-card bounce-in-top flag-img ">
+                <div class="flip-card-inner jello-horizontal">
+                    <div class="flip-card-front ">
+                        <img src="${country.flags.png}" class="card-img-top flag-img " alt="Flag of ${country.name.common}">
                     </div>
-                    <div class="flip-card-back" id="backFace-${i}">
+                    <div class="flip-card-back " id="backFace-${i}">
                         <p id="answerText-${i}"></p>
                     </div>
                 </div>
@@ -96,7 +103,8 @@ function displayCountries(countries, number, playerName) {
         </div>`;
     });
 
-    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary justify-content-center mt-3 subbtn">Submit Answers</button>';
+    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary justify-content-center mt-3' +
+        ' subbtn pulse">Ben je zeker?</button>';
     document.getElementById("checkAnswersButton").addEventListener("click", () => checkAllAnswers(selectedCountries, playerName));
 }
 
@@ -178,11 +186,11 @@ function determineFeedback(correct, total) {
     if (percentage === 100) {
         return "Excellent!!!";
     } else if (percentage > 50) {
-        return "Good";
+        return "Close but no cigar";
     } else if (percentage === 0) {
-        return "Needs Improvement";
+        return "Bummer...";
     } else {
-        return "What happened?";
+        return "Try a book in the future...";
     }
 }
 

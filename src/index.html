@@ -8,7 +8,8 @@
     <title>Team Project - Rest Countries</title>
     <style>
         body {
-            background-color: #a4a4a4;
+            background: url("images/globe3.png") no-repeat center center fixed;
+            width: fit-content;
         }
 
         .container {  display: grid;
@@ -17,11 +18,108 @@
             gap: 15px 15px;
             grid-auto-flow: row;
             justify-items: center;
-            grid-template-areas:
-    ". . ."
 
-        ;
         }
+        .navbar {
+            justify-content: center;
+        }
+
+
+        .navbar .container-fluid {
+            justify-content: center;
+            linearGradient: darkgrey 100%, black 100%;
+        }
+
+        /* Als de navbar-brand en andere elementen ook gecentreerd moeten worden */
+        .navbar-brand, .navbar-collapse {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+
+
+
+        .jello-horizontal {
+            -webkit-animation: jello-horizontal 0.9s both;
+            animation: jello-horizontal 0.9s both;
+        }
+
+        .jello-horizontal:hover {
+            -webkit-animation: jello-horizontal 0.9s both;
+            animation: jello-horizontal 0.9s both;
+        }
+
+
+        @-webkit-keyframes jello-horizontal {
+            0% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+            30% {
+                -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+            }
+            40% {
+                -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+            }
+            50% {
+                -webkit-transform: scale3d(1.15, 0.85, 1);
+                transform: scale3d(1.15, 0.85, 1);
+            }
+            65% {
+                -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+            }
+            75% {
+                -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+            }
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        @keyframes jello-horizontal {
+            0% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+            30% {
+                -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+            }
+            40% {
+                -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+            }
+            50% {
+                -webkit-transform: scale3d(1.15, 0.85, 1);
+                transform: scale3d(1.15, 0.85, 1);
+            }
+            65% {
+                -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+            }
+            75% {
+                -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+            }
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+
+        .flag-img {
+            transition: transform 0.3s ease; /* Voegt een soepele overgang toe */
+        }
+
+        .flag-img:hover {
+            transform: scale(1.1); /* Vergroot de vlag naar 110% van zijn grootte */
+        }
+
 
 
         .flip-card {
@@ -103,7 +201,7 @@
         .typingeffect{
             overflow: hidden;
             white-space: nowrap;
-            animation: typewriter 4s steps(40, end) forwards ;
+            animation: typewriter 0.5s steps(40, end) forwards ;
             border-right: 1px solid black;
             width: 0;
         }
@@ -304,9 +402,9 @@
 <!--HEADER AND NAVBAR-->
 
 <header>
-    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body " data-bs-theme="dark">
-        <div class="container-fluid ">
-            <a class="navbar-brand" href="#"><h1><strong>Capture the FLAG!</strong></h1></a>
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid d-flex justify-content-center">
+            <a class="navbar-brand" href="#"><h1 class="typingeffect"><strong>Capture the FLAG!</strong></h1></a>
             <button class="navbar-toggler btn btn-primary ms-2" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -319,7 +417,9 @@
                         <option value="europe">Europa</option>
                         <option value="americas">Amerika</option>
                     </select>
-                    <button id="generateButton"  class=" btn btn-outline-success pulse green" type="submit">SPEEL!</button>
+                    <button id="generateButton" onclick="playSound()" class=" btn btn-outline-success pulse green" type="submit" >SPEEL!</button>
+                    <audio id="mySound" src="images/slotmachine.mp3"></audio>
+
                 </form>
             </div>
         </div>
@@ -331,8 +431,10 @@
 <main id="quiz">
     <div class="row mt-5">
         <div class="col-lg-8 offset-2">
-            <div id="result" class="container card pt-4 rounded-3 justify-content-center bg-secondary-subtle bounce-in-top"
-                 style="width:830px;">
+            <div id="result"
+                 class="container card pt-4 rounded-3  bg-secondary-subtle text-center bounce-in-top"
+                 style="width:auto;">
+
             </div>
 
         </div>
@@ -359,5 +461,9 @@
 </section>
 
 <script src="js/fcreatec.js"></script>
+<script>function playSound() {
+    var sound = document.getElementById("mySound");
+    sound.play();
+}</script>
 </body>
 </html>
