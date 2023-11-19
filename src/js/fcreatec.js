@@ -1,21 +1,35 @@
+function startGame() {
+    correctAnswers = 0; // Reset het aantal correcte antwoorden
+    playSound(); // Speel een geluid af (indien nodig).
+    startTimer(); // Start de timer.
+    generateCountries(); // Start het spel.
+}
+
+let startTime;
+let timerInterval;
 
 
+function startTimer() {
+    stopTimer();
+    startTime = new Date();
+    timerInterval = setInterval(updateTimer, 1000); // Update de timer elke seconde
+}
 
-let highScores = [];
+function updateTimer() {
+    let currentTime = new Date();
+    let elapsedTime = Math.floor((currentTime - startTime) / 1000); // Tijd in seconden
+    let minutes = Math.floor(elapsedTime / 60);
+    let seconds = elapsedTime % 60;
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('highScores')) {
-        highScores = JSON.parse(localStorage.getItem('highScores'));
-        displayHighScores();
-    }
+    document.getElementById("timerDisplay").textContent = minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+}
 
-    document.getElementById("generateButton").addEventListener("click", (e) => {
-        e.preventDefault();
-        generateCountries();
-    });
+function stopTimer() {
+    clearInterval(timerInterval);
+    console.log("Timer gestopt"); // Bevestig dat de timer is gestopt
+}
 
-    document.getElementById("resetHighScoreButton").addEventListener("click", resetHighScores);
-});
+
 
 function generateCountries() {
     let welcomeText = document.getElementById('welcomeText');
@@ -28,6 +42,16 @@ function generateCountries() {
     let apiUrl = continent === 'all' ? 'https://restcountries.com/v3.1/all' : `https://restcountries.com/v3.1/region/${continent}`;
 
     if (!validateInput(number, playerName)) return;
+    {
+        startTimer();
+    }
+    let generateButton = document.getElementById("generateButton");
+    if (generateButton) {
+        generateButton.addEventListener("click", startGame);
+    } else {
+        console.error("Element met ID 'generateButton' niet gevonden.");
+    }
+
 
 
 
@@ -43,6 +67,7 @@ function generateCountries() {
         .catch(error => {
             console.error('Error fetching countries:', error);
         });
+
 }
 
 
@@ -107,42 +132,39 @@ function displayCountries(countries, number, playerName) {
 }
 
 function generateRandomOptions(countries, correctOption) {
-    let options = new Set([correctOption]);
-    while (options.size < 3) {
+    let options = [correctOption];
+    while (options.length < 3) {
         let randomOption = countries[Math.floor(Math.random() * countries.length)].name.common;
-        options.add(randomOption);
+        if (!options.includes(randomOption)) {
+            options.push(randomOption);
+        }
     }
-    return Array.from(options);
+    // Shuffle de opties
+    return options.sort(() => Math.random() - 0.5);
 }
 
-let answersSubmitted = false;
+
 
 function checkAllAnswers(selectedCountries, playerName) {
+    stopTimer();
     if (answersSubmitted) return;
     answersSubmitted = true;
-    let correctAnswers = 0;
+
+    correctAnswers = 0; // Reset correctAnswers voor elke nieuwe spelronde
+
+    console.log("checkAllAnswers wordt uitgevoerd"); // Debugging
 
     selectedCountries.forEach((country, index) => {
         let selectedOption;
         let radioButtons = document.querySelectorAll(`input[name="countryOption_${index}"]:checked`);
         if (radioButtons.length > 0) {
             selectedOption = radioButtons[0].value;
+            if (selectedOption === country.name.common) {
+                correctAnswers++;
+            }
         }
 
-        let cardElement = document.getElementById(`countryQuiz_${index}`);
-        let backFaceElement = cardElement.querySelector(`#backFace-${index}`);
-        let answerTextElement = cardElement.querySelector(`#answerText-${index}`);
 
-        if (selectedOption === country.name.common) {
-            answerTextElement.textContent = "Correct!";
-            backFaceElement.style.backgroundColor = "green";
-            correctAnswers++;
-        } else {
-            answerTextElement.textContent = "Incorrect";
-            backFaceElement.style.backgroundColor = "red";
-        }
-
-        cardElement.querySelector('.flip-card-inner').classList.add('flipped');
 
         // Update de kleuren van de radiobuttons en labels
         document.querySelectorAll(`input[name="countryOption_${index}"]`).forEach(radioButton => {
@@ -153,50 +175,77 @@ function checkAllAnswers(selectedCountries, playerName) {
                 label.style.color = radioButton.checked ? "red" : "black";
             }
         });
-    });
 
-    updateHighScoreBoard(playerName, correctAnswers, selectedCountries.length);
+
+        let feedback = determineFeedback(correctAnswers, selectedCountries.length);
+        updateHighScoreBoard(playerName, correctAnswers, selectedCountries.length, feedback);
+
+    })
+
+
+
 }
 
-function updateHighScoreBoard(playerName, score, total) {
-    let feedback = determineFeedback(score, total);
-    let existingEntry = highScores.find(entry => entry.name === playerName && entry.total === 0);
+function updateHighScoreBoard(playerName, score, total, feedback) {
+    let finalTime = document.getElementById("timerDisplay").textContent;
+    console.log("Score: " + score + ", Total: " + total + ", Time: " + finalTime);
 
+    let existingEntry = highScores.find(entry => entry.name === playerName);
     if (existingEntry) {
-        existingEntry.score = score;
-        existingEntry.total = total;
-        existingEntry.feedback = feedback;
+        if (score > existingEntry.score) { // Update only if the new score is higher
+            existingEntry.score = score;
+            existingEntry.time = finalTime;
+            existingEntry.feedback = feedback;
+            console.log("Bijwerken bestaande invoer: ", existingEntry);
+        }
     } else {
-        let scoreEntry = { name: playerName, score: score, total: total, feedback: feedback };
-        highScores.push(scoreEntry);
+        let newEntry = { name: playerName, score: score, total: total, time: finalTime, feedback: feedback };
+        highScores.push(newEntry);
+        console.log("Nieuwe invoer toegevoegd: ", newEntry);
     }
 
-    // Sorteer de highScores-array op basis van scores in aflopende volgorde
     highScores.sort((a, b) => b.score - a.score);
-
-    // Verplaats deze aanroep naar hier om het scoreboard bij te werken
     displayHighScores();
+    localStorage.setItem('highScores', JSON.stringify(highScores));
 }
 
 
 function determineFeedback(correct, total) {
     let percentage = (correct / total) * 100;
+
+    // Toevoegen van console logs voor debugdoeleinden
+    console.log("Aantal correcte antwoorden: " + correct);
+    console.log("Totaal aantal vragen: " + total);
+    console.log("Behaalde percentage: " + percentage + "%");
+
     if (percentage === 100) {
-        return "Excellent!!!";
-    } else if (percentage > 50) {
-        return "Close but no cigar";
-    } else if (percentage === 0) {
-        return "Bummer...";
+        console.log("Feedback: Supreme SmartAss!!!");
+        return "Supreme SmartAss!!!";
+    } else if (percentage >= 80) {
+        console.log("Feedback: Close but no cigar!");
+        return "Close but no cigar!";
+    } else if (percentage >= 60) {
+        console.log("Feedback: Amazing!...(If you're going for average)");
+        return "Amazing!...(If you're going for average)";
+    } else if (percentage >= 40) {
+        console.log("Feedback: Oh well... Better luck next time!");
+        return "Oh well... Better luck next time!";
+    } else if (percentage >= 20) {
+        console.log("Feedback: Don't quit your day job!");
+        return "Don't quit your day job!";
     } else {
-        return "Try a book in the future...";
+        console.log("Feedback: Maybe you should try a book once in a while...");
+        return "Maybe you should try a book once in a while...";
     }
 }
+
 
 function displayHighScores() {
     let highScoreBoard = document.getElementById("highScoreBoard");
     highScoreBoard.innerHTML = highScores.map(score =>
-        `<div>${score.name}: ${score.score}/${score.total} - ${score.feedback}</div>`
+        `<div>${score.name}: ${score.score}/${score.total} - Time: ${score.time} - : ${score.feedback}</div>`
     ).join('');
+
     localStorage.setItem('highScores', JSON.stringify(highScores));
 }
 
@@ -214,3 +263,10 @@ function resetHighScores() {
     displayHighScores();
     localStorage.setItem('highScores', JSON.stringify(highScores));
 }
+
+
+
+
+
+
+
