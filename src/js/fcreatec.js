@@ -1,5 +1,5 @@
 function startGame() {
-    let correctAnswers = 0; // Reset het aantal correcte antwoorden
+    correctAnswers = 0; // Reset het aantal correcte antwoorden
     playSound(); // Speel een geluid af (indien nodig).
     startTimer(); // Start de timer.
     generateCountries(); // Start het spel.
@@ -7,6 +7,7 @@ function startGame() {
 
 let startTime;
 let timerInterval;
+
 
 function startTimer() {
     stopTimer();
@@ -45,13 +46,16 @@ function generateCountries() {
         console.error("Element met ID 'generateButton' niet gevonden.");
     }
 
+
+
+
     // Reset answersSubmitted naar false bij het starten van een nieuwe spelronde
-    let answersSubmitted = false;
+    answersSubmitted = false;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            let selectedCountries = []; // Leeg de array voordat nieuwe landen worden gegenereerd
+            selectedCountries = []; // Leeg de array voordat nieuwe landen worden gegenereerd
             displayCountries(data, number, playerName);
         })
         .catch(error => {
@@ -84,6 +88,8 @@ function displayCountries(countries, number, playerName) {
         }
     }
 
+
+
     selectedCountries.forEach((country, i) => {
         let options = generateRandomOptions(countries, country.name.common);
         let optionsHtml = options.map((option, index) =>
@@ -96,18 +102,24 @@ function displayCountries(countries, number, playerName) {
                 </label>
             </div>`).join('');
 
+
         resultContainer.innerHTML += `
-        <div class="col-lg-3" id="countryQuiz_${i}">
-            <div class="bounce-in-top flag-img">
-                <div class="jello-horizontal">
+        <div class="col-md-6 country-quiz col-12 col-md-6 col-lg-4 " id="countryQuiz_${i}">
+            <div class="flip-card bounce-in-top flag-img">
+                <div class="flip-card-inner jello-horizontal">
+                    <div class="flip-card-front ">
                         <img src="${country.flags.png}" class="card-img-top flag-img center" alt="Flag of ${country.name.common}">
+                    </div>
+                    <div class="flip-card-back " id="backFace-${i}">
+                        <p id="answerText-${i}"></p>
+                    </div>
                 </div>
             </div>
             <div class="options">${optionsHtml}</div>
         </div>`;
     });
 
-    resultContainer.innerHTML += '<button id="checkAnswersButton" class=" btn btn-primary ' +
+    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary ' +
         ' mt-3' +
         ' pulse">Ben je zeker?</button>';
     document.getElementById("checkAnswersButton").addEventListener("click", () => checkAllAnswers(selectedCountries, playerName));
@@ -130,9 +142,9 @@ function generateRandomOptions(countries, correctOption) {
 function checkAllAnswers(selectedCountries, playerName) {
     stopTimer();
     if (answersSubmitted) return;
-    let answersSubmitted = true;
+    answersSubmitted = true;
 
-    let correctAnswers = 0; // Reset correctAnswers voor elke nieuwe spelronde
+    correctAnswers = 0; // Reset correctAnswers voor elke nieuwe spelronde
 
     console.log("checkAllAnswers wordt uitgevoerd"); // Debugging
 
@@ -146,6 +158,8 @@ function checkAllAnswers(selectedCountries, playerName) {
             }
         }
 
+
+
         // Update de kleuren van de radiobuttons en labels
         document.querySelectorAll(`input[name="countryOption_${index}"]`).forEach(radioButton => {
             let label = document.querySelector(`label[for="${radioButton.id}"]`);
@@ -155,6 +169,7 @@ function checkAllAnswers(selectedCountries, playerName) {
                 label.style.color = radioButton.checked ? "red" : "black";
             }
         });
+
 
         let feedback = determineFeedback(correctAnswers, selectedCountries.length);
         updateHighScoreBoard(playerName, correctAnswers, selectedCountries.length, feedback);
@@ -242,10 +257,3 @@ function resetHighScores() {
     displayHighScores();
     localStorage.setItem('highScores', JSON.stringify(highScores));
 }
-
-
-
-
-
-
-
