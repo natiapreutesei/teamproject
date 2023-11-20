@@ -88,15 +88,12 @@ function displayCountries(countries, number, playerName) {
         }
     }
 
-
-
     selectedCountries.forEach((country, i) => {
         let options = generateRandomOptions(countries, country.name.common);
         let optionsHtml = options.map((option, index) =>
             `<div class="form-check fade-in">
                 <input  class="form-check-input " type="radio" name="countryOption_${i}" id="option_${i}_${index}" value="${option}">
-                
-                
+          
                 <label class="form-check-label" for="option_${i}_${index}">
                     ${option}
                 </label>
@@ -104,23 +101,18 @@ function displayCountries(countries, number, playerName) {
 
 
         resultContainer.innerHTML += `
-        <div class="col-md-6 country-quiz col-12 col-md-6 col-lg-4 " id="countryQuiz_${i}">
-            <div class="flip-card bounce-in-top flag-img">
-                <div class="flip-card-inner jello-horizontal">
-                    <div class="flip-card-front ">
+        <div class="col-md-6 col-lg-4 " id="countryQuiz_${i}">
+            <div class=" bounce-in-top flag-img">
+                <div class="jello-horizontal">
                         <img src="${country.flags.png}" class="card-img-top flag-img center" alt="Flag of ${country.name.common}">
-                    </div>
-                    <div class="flip-card-back " id="backFace-${i}">
-                        <p id="answerText-${i}"></p>
-                    </div>
                 </div>
             </div>
             <div class="options">${optionsHtml}</div>
         </div>`;
     });
 
-    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary ' +
-        ' mt-3' +
+    resultContainer.innerHTML += '<button id="checkAnswersButton" class="w-25 btn btn-primary ' +
+        ' mt-3 mx-auto' +
         ' pulse">Ben je zeker?</button>';
     document.getElementById("checkAnswersButton").addEventListener("click", () => checkAllAnswers(selectedCountries, playerName));
 }

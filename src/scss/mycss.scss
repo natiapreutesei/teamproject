@@ -20,30 +20,13 @@ html {
 body{
   padding-left: 0 !important;
   padding-right: 0 !important;
-  background: url("../images/globe3.png") no-repeat center fixed;
-  background-size: cover;
-  width: fit-content;;
-  --after-opacity: 0; /* Standaardwaarde */
-  transition: background-image 1s ease-in-out;
+  background: #1a1d20;
 }
-body::after {
-  content: "";
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("../images/globe6a.png") no-repeat center fixed;
-  background-size: cover;
-  transition: opacity 1s ease-in-out;
-  opacity: var(--after-opacity);
-  z-index: -1;
-}
+
 
 .form-check-input:hover, .form-check-label:hover {
   cursor: pointer;
 }
-/*VARIABLES*/
-
 /*FROM HERE WE WORK MOBILE ORIENTED*/
 /*BEGIN NAVBAR*/
 
