@@ -3,415 +3,21 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
+    <script type="module" src="./js/main.js"></script>
     <title>Team Project - Rest Countries</title>
-    <style>
-        body {
-            background: url("images/globe3.png") no-repeat center center fixed;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            width: fit-content;
-            padding-left: 500px;
-            --after-opacity: 0; /* Standaardwaarde */
-            transition: background-image 1s ease-in-out;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("images/globe6a.png") no-repeat center center fixed;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: opacity 1s ease-in-out;
-            opacity: var(--after-opacity);
-            z-index: -1;
-        }
-        html {
-            overflow-y: scroll;
-        }
-
-        .container {  display: grid;
-            grid-template-columns: 350px 350px 350px;
-            grid-template-rows: 0.65fr 0.4fr 0.65fr 0.4fr 0.65fr 0.4fr;
-            gap: 15px 15px;
-            grid-auto-flow: row;
-            justify-items: center;
-
-        }
-        .navbar {
-            justify-content: center;
-        }
-
-
-        .navbar .container-fluid {
-            justify-content: center;
-        }
-
-        /* Als de navbar-brand en andere elementen ook gecentreerd moeten worden */
-        .navbar-brand, .navbar-collapse {
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        #result {
-            background-color: rgba(0, 0, 0, 0)!important; /* Witte achtergrond met 50% doorzichtigheid */
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        #continentSelect {
-            color: #9ab3da;
-        }
-
-        .form-check-input:hover, .form-check-label:hover {
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .fade-in {
-            animation: fadeIn 2.5s ease-in forwards;
-        }
-        .fade-in-later {
-            animation: fadeIn 1s ease-in 2s forwards; /* Begint na een vertraging van 2 seconden */
-        }
-
-
-        .jello-horizontal {
-            -webkit-animation: jello-horizontal 0.9s both;
-            animation: jello-horizontal 0.9s both;
-        }
-
-        .jello-horizontal:hover {
-            -webkit-animation: jello-horizontal 0.9s both;
-            animation: jello-horizontal 0.9s both;
-        }
-
-
-        @-webkit-keyframes jello-horizontal {
-            0% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-            30% {
-                -webkit-transform: scale3d(1.25, 0.75, 1);
-                transform: scale3d(1.25, 0.75, 1);
-            }
-            40% {
-                -webkit-transform: scale3d(0.75, 1.25, 1);
-                transform: scale3d(0.75, 1.25, 1);
-            }
-            50% {
-                -webkit-transform: scale3d(1.15, 0.85, 1);
-                transform: scale3d(1.15, 0.85, 1);
-            }
-            65% {
-                -webkit-transform: scale3d(0.95, 1.05, 1);
-                transform: scale3d(0.95, 1.05, 1);
-            }
-            75% {
-                -webkit-transform: scale3d(1.05, 0.95, 1);
-                transform: scale3d(1.05, 0.95, 1);
-            }
-            100% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-        }
-        @keyframes jello-horizontal {
-            0% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-            30% {
-                -webkit-transform: scale3d(1.25, 0.75, 1);
-                transform: scale3d(1.25, 0.75, 1);
-            }
-            40% {
-                -webkit-transform: scale3d(0.75, 1.25, 1);
-                transform: scale3d(0.75, 1.25, 1);
-            }
-            50% {
-                -webkit-transform: scale3d(1.15, 0.85, 1);
-                transform: scale3d(1.15, 0.85, 1);
-            }
-            65% {
-                -webkit-transform: scale3d(0.95, 1.05, 1);
-                transform: scale3d(0.95, 1.05, 1);
-            }
-            75% {
-                -webkit-transform: scale3d(1.05, 0.95, 1);
-                transform: scale3d(1.05, 0.95, 1);
-            }
-            100% {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-            }
-        }
-
-
-        .flag-img {
-            transition: transform 0.3s ease; /* Voegt een soepele overgang toe */
-            margin-bottom: 30px;
-            margin-top: 10px;
-            width: 150px;  /* of elke gewenste breedte */
-            height: 100px; /* of elke gewenste hoogte */
-            object-fit: contain; /* Dit zorgt ervoor dat de afbeelding geschaald wordt binnen de gegeven afmetingen zonder de verhoudingen te verstoren */
-        }
-
-
-
-        .flag-img:hover {
-            transform: scale(1.1); /* Vergroot de vlag naar 110% van zijn grootte */
-            animation: ease-in-out;
-        }
-
-
-
-        .correct {
-            background-color: green;
-        }
-
-        .incorrect {
-            background-color: red;
-        }
-
-        .flex-column {
-            flex-direction: column;
-        }
-        .flex-row {
-            flex-direction: column;
-        }
-
-
-        @keyframes typewriter {
-            from {width: 0;}
-            to {width: 100%;}
-        }
-
-        /*hieronder wordt de animatie van hierboven toegepast*/
-        .typingeffect{
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typewriter 0.5s steps(40, end) forwards ;
-            border-right: 1px solid #192126;
-            width: 0;
-        }
-
-        @-webkit-keyframes bounce-in-top {
-            0% {
-                -webkit-transform: translateY(-500px);
-                transform: translateY(-500px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-                opacity: 0;
-            }
-            38% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-                opacity: 1;
-            }
-            55% {
-                -webkit-transform: translateY(-65px);
-                transform: translateY(-65px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            72% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            81% {
-                -webkit-transform: translateY(-28px);
-                transform: translateY(-28px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            90% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            95% {
-                -webkit-transform: translateY(-8px);
-                transform: translateY(-8px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            100% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-        }
-        .bounce-in-top {
-            -webkit-animation: bounce-in-top 1.1s both;
-            animation: bounce-in-top 1.1s both;
-        }
-        @keyframes bounce-in-top {
-            0% {
-                -webkit-transform: translateY(-500px);
-                transform: translateY(-500px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-                opacity: 0;
-            }
-            38% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-                opacity: 1;
-            }
-            55% {
-                -webkit-transform: translateY(-65px);
-                transform: translateY(-65px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            72% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            81% {
-                -webkit-transform: translateY(-28px);
-                transform: translateY(-28px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            90% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-            95% {
-                -webkit-transform: translateY(-8px);
-                transform: translateY(-8px);
-                -webkit-animation-timing-function: ease-in;
-                animation-timing-function: ease-in;
-            }
-            100% {
-                -webkit-transform: translateY(0);
-                transform: translateY(0);
-                -webkit-animation-timing-function: ease-out;
-                animation-timing-function: ease-out;
-            }
-        }
-
-
-        .slide-in-fwd-center {
-            -webkit-animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-        }
-
-
-
-        .green{
-            background: #178fa2;
-            color: white;
-        }
-
-        .orange{
-            background: #f17c57fa;
-        }
-
-        .blue{
-            background: #3652D9;
-        }
-
-
-
-
-        .pulse {
-            animation: pulse-animation 2s infinite;
-
-        }
-
-        @keyframes pulse-animation {
-            0% {
-                box-shadow: 0 0 0 0px rgb(23, 142, 161);
-            }
-            100% {
-                box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
-            }
-        }
-
-
-
-        @media (max-width:900px){
-            .master{
-                display:none
-            }
-        }
-        @media (min-width: 768px) { /* Voor middelgrote schermen en groter */
-            .country-quiz {
-                flex: 0 0 auto;
-                width: 50%; /* Of een andere breedte naar keuze */
-            }
-        }
-
-        #highScoreBoard{
-            font-weight: normal;
-        }
-
-        #time {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 35px;
-            color: #fff;
-            text-align: center;
-            margin: 0 0 0 0;
-            justify-content: center;
-
-        }
-
-        #timerDisplay {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 17px;
-            color: #fff;
-            text-align: center;
-            margin: 0 0 0 0;
-
-        }
-
-
-    </style>
 </head>
 <body class="container-fluid">
 <!--HEADER AND NAVBAR-->
 
 <header>
     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
-        <div class="container-fluid d-flex justify-content-center">
+        <div class="container-fluid d-flex">
             <a class="navbar-brand" href="#"><h1 class="typingeffect"><strong>Capture the FLAG!</strong></h1></a>
             <button class="navbar-toggler btn btn-primary ms-2" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <button id="generateButton" onclick="startGame()"
                         class="btn btn-outline-success pulse green ms-3 me-3" type="submit" >SPEEL!
                 </button>
@@ -432,22 +38,16 @@
                     </select>
 
                     <label class="form-control ">
-
                         <div class="container-fluid">
                             <div id="timerDisplay">
-                                <span class="digit" id="hr">
-                                 00</span>
+                                <span class="digit" id="hr">00</span>
                                 <span class="txt">Min</span>
-                                <span class="digit" id="sec">
-                        00</span>
+                                <span class="digit" id="sec">00</span>
                                 <span class="txt">Sec</span>
-                                <span class="digit" id="count">
-                        </span>
+                                <span class="digit" id="count"></span>
                             </div>
                         </div>
                     </label>
-
-
                 </form>
             </div>
         </div>
@@ -456,20 +56,14 @@
 
 </header>
 <!--QUIZ-->
-<main id="quiz">
-    <div class="row mt-5">
-        <div class="">
-            <div id="result"
-                 class="container card pt-4 border-0 rounded-3 justify-content-center bg-secondary-subtle bounce-in-top col-xs-12 col-sm-10 col-md-8 col-lg-6"
-                 style="width:auto;">
+<main id="quiz" class="row mt-5">
+        <div class="col-lg-8 offset-2">
+            <div id="result" class="row border-0 rounded-3 justify-content-center bg-secondary-subtle bounce-in-top">
 
                 <!-- Quizinhoud wordt hier toegevoegd door JavaScript -->
 
             </div>
-
         </div>
-    </div>
-    </div>
 </main>
 <!--SCOREBOARD-->
 <section id="highScoreSection">
@@ -491,13 +85,13 @@
 </section>
 
 <script src="js/fcreatec.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>function playSound() {
     var sound = document.getElementById("mySound");
     sound.play();
     var sound2 = document.getElementById("alertSound");
     sound.play();
-    document.body.style.setProperty('--after-opacity', '1');}</script>
+    document.body.style.setProperty('--after-opacity', '1');}
+</script>
 </body>
 </html>

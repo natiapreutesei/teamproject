@@ -13,11 +13,32 @@
 }
 
 /*GLOBAL CLASSES*/
+html {
+  overflow-y: scroll;
+}
 body{
   padding-left: 0 !important;
   padding-right: 0 !important;
+  background: url("../images/globe3.png") no-repeat center fixed;
+  width: fit-content;
+  --after-opacity: 0; /* Standaardwaarde */
+  transition: background-image 1s ease-in-out;
+}
+body::after {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../images/globe6a.png") no-repeat center fixed;
+  transition: opacity 1s ease-in-out;
+  opacity: var(--after-opacity);
+  z-index: -1;
 }
 
+.form-check-input:hover, .form-check-label:hover {
+  cursor: pointer;
+}
 /*VARIABLES*/
 
 /*FROM HERE WE WORK MOBILE ORIENTED*/
@@ -30,18 +51,220 @@ body{
     font-size: 40px;
   }
 }
+
+#continentSelect {
+  color: #9ab3da;
+}
+
 /*BEGIN QUIZ*/
-label{
-  font-size: 30px;
-  font-family: sogoeuib;
+#result {
+  background-color: rgba(0, 0, 0, 0)!important;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+.flag-img {
+  transition: transform 0.3s ease; /* Voegt een soepele overgang toe */
+  margin-bottom: 30px;
+  margin-top: 10px;
+  width: 150px;  /* of elke gewenste breedte */
+  height: 100px; /* of elke gewenste hoogte */
+  object-fit: contain; /* Dit zorgt ervoor dat de afbeelding geschaald wordt binnen de gegeven afmetingen zonder de verhoudingen te verstoren */
+}
+
+.flag-img:hover {
+  transform: scale(1.1); /* Vergroot de vlag naar 110% van zijn grootte */
+  animation: ease-in-out;
+}
+.correct {
+  background-color: green;
+}
+
+.incorrect {
+  background-color: red;
+}
+.green{
+  background: #178fa2;
+  color: white;
 }
 
 /*END QUIZ*/
 
 /*BEGIN SCOREBOARD*/
-
+#highScoreBoard{
+  font-weight: normal;
+}
 /*END SCOREBOARD*/
+
+/*START TIME*/
+#time {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 0 0;
+  justify-content: center;
+
+}
+
+#timerDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 17px;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 0 0;
+
+}
+/*END TIME*/
+
+/*START ANIMATIONS*/
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fadeIn 2.5s ease-in forwards;
+}
+.fade-in-later {
+  animation: fadeIn 1s ease-in 2s forwards; /* Begint na een vertraging van 2 seconden */
+}
+
+.jello-horizontal {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
+}
+.jello-horizontal:hover {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
+}
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes typewriter {
+  from {width: 0;}
+  to {width: 100%;}
+}
+.typingeffect{
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 0.5s steps(40, end) forwards ;
+  border-right: 1px solid #192126;
+  width: 0;
+}
+
+.bounce-in-top {
+  -webkit-animation: bounce-in-top 1.1s both;
+  animation: bounce-in-top 1.1s both;
+}
+@keyframes bounce-in-top {
+  0% {
+    -webkit-transform: translateY(-500px);
+    transform: translateY(-500px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateY(-65px);
+    transform: translateY(-65px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateY(-28px);
+    transform: translateY(-28px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}
+
+.slide-in-fwd-center {
+  -webkit-animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.pulse {
+  animation: pulse-animation 2s infinite;
+
+}
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgb(23, 142, 161);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+  }
+}
+/*END ANIMATIONS*/
 
 /*FROM HERE WE WORK DESKTOP ORIENTED W/ MEDIA QUERY'S*/
 @media (min-width: 992px){
+  .master{
+    display:none
+  }
 }
+
+

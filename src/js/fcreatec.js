@@ -1,5 +1,5 @@
 function startGame() {
-    correctAnswers = 0; // Reset het aantal correcte antwoorden
+    let correctAnswers = 0; // Reset het aantal correcte antwoorden
     playSound(); // Speel een geluid af (indien nodig).
     startTimer(); // Start de timer.
     generateCountries(); // Start het spel.
@@ -7,7 +7,6 @@ function startGame() {
 
 let startTime;
 let timerInterval;
-
 
 function startTimer() {
     stopTimer();
@@ -29,13 +28,7 @@ function stopTimer() {
     console.log("Timer gestopt"); // Bevestig dat de timer is gestopt
 }
 
-
-
 function generateCountries() {
-    let welcomeText = document.getElementById('welcomeText');
-    if (welcomeText) {
-        welcomeText.style.display = 'none';
-    }
     let number = 15;
     let playerName = document.getElementById("playerName").value;
     let continent = document.getElementById("continentSelect").value;
@@ -52,16 +45,13 @@ function generateCountries() {
         console.error("Element met ID 'generateButton' niet gevonden.");
     }
 
-
-
-
     // Reset answersSubmitted naar false bij het starten van een nieuwe spelronde
-    answersSubmitted = false;
+    let answersSubmitted = false;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            selectedCountries = []; // Leeg de array voordat nieuwe landen worden gegenereerd
+            let selectedCountries = []; // Leeg de array voordat nieuwe landen worden gegenereerd
             displayCountries(data, number, playerName);
         })
         .catch(error => {
@@ -94,8 +84,6 @@ function displayCountries(countries, number, playerName) {
         }
     }
 
-
-
     selectedCountries.forEach((country, i) => {
         let options = generateRandomOptions(countries, country.name.common);
         let optionsHtml = options.map((option, index) =>
@@ -108,17 +96,11 @@ function displayCountries(countries, number, playerName) {
                 </label>
             </div>`).join('');
 
-
         resultContainer.innerHTML += `
-        <div class="col-md-6 country-quiz col-12 col-md-6 col-lg-4 " id="countryQuiz_${i}">
-            <div class="flip-card bounce-in-top flag-img">
-                <div class="flip-card-inner jello-horizontal">
-                    <div class="flip-card-front ">
+        <div class="col-lg-3" id="countryQuiz_${i}">
+            <div class="bounce-in-top flag-img">
+                <div class="jello-horizontal">
                         <img src="${country.flags.png}" class="card-img-top flag-img center" alt="Flag of ${country.name.common}">
-                    </div>
-                    <div class="flip-card-back " id="backFace-${i}">
-                        <p id="answerText-${i}"></p>
-                    </div>
                 </div>
             </div>
             <div class="options">${optionsHtml}</div>
@@ -148,9 +130,9 @@ function generateRandomOptions(countries, correctOption) {
 function checkAllAnswers(selectedCountries, playerName) {
     stopTimer();
     if (answersSubmitted) return;
-    answersSubmitted = true;
+    let answersSubmitted = true;
 
-    correctAnswers = 0; // Reset correctAnswers voor elke nieuwe spelronde
+    let correctAnswers = 0; // Reset correctAnswers voor elke nieuwe spelronde
 
     console.log("checkAllAnswers wordt uitgevoerd"); // Debugging
 
@@ -164,8 +146,6 @@ function checkAllAnswers(selectedCountries, playerName) {
             }
         }
 
-
-
         // Update de kleuren van de radiobuttons en labels
         document.querySelectorAll(`input[name="countryOption_${index}"]`).forEach(radioButton => {
             let label = document.querySelector(`label[for="${radioButton.id}"]`);
@@ -175,7 +155,6 @@ function checkAllAnswers(selectedCountries, playerName) {
                 label.style.color = radioButton.checked ? "red" : "black";
             }
         });
-
 
         let feedback = determineFeedback(correctAnswers, selectedCountries.length);
         updateHighScoreBoard(playerName, correctAnswers, selectedCountries.length, feedback);
