@@ -101,13 +101,15 @@ function displayCountries(countries, number, playerName) {
 
 
         resultContainer.innerHTML += `
-        <div class="col-md-6 col-lg-4 " id="countryQuiz_${i}">
-            <div class=" bounce-in-top flag-img text-center">
+        <div class="col-md-6 col-lg-4 border border-1 border-white bg-white bg-opacity-25 rounded-5 rounded-top-0">
+            <div class="d-flex flex-column " id="countryQuiz_${i}">
+             <div class=" bounce-in-top flag-img text-center align-self-center">
                 <div class="jello-horizontal">
                         <img src="${country.flags.png}" class="card-img-top flag-img center" alt="Flag of ${country.name.common}">
                 </div>
-            </div>
-            <div class="options">${optionsHtml}</div>
+             </div>
+            <div class="options align-self-center">${optionsHtml}</div>
+         </div>
         </div>`;
     });
 
@@ -248,4 +250,10 @@ function resetHighScores() {
     highScores = [];
     displayHighScores();
     localStorage.setItem('highScores', JSON.stringify(highScores));
+}
+
+function playSound() {
+    var sound = document.getElementById("mySound");
+    sound.play();
+    document.body.style.setProperty('--after-opacity', '1');
 }

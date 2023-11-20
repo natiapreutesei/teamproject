@@ -2,13 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Team Project - Rest Countries</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     
-  <script type="module" crossorigin src="/assets/index-c44bdba5.js"></script>
-  <link rel="stylesheet" href="/assets/index-4c3504b5.css">
+    <title>Team Project - Rest Countries</title>
+  <script type="module" crossorigin src="./assets/index-c6362884.js"></script>
+  <link rel="stylesheet" href="./assets/index-494c7096.css">
 </head>
-<body>
+<body class="container-fluid">
+<!--HEADER AND NAVBAR-->
+<header class="row">
+    <div class="col-12">
+        <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div class="container-fluid d-flex">
+                <a class="navbar-brand" href="#"><h1 class="typingeffect"><strong>Capture the FLAG!</strong></h1></a>
+                <button class="navbar-toggler btn btn-primary ms-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <button id="generateButton" onclick="startGame()"
+                            class="btn btn-outline-success pulse green ms-3 me-3" type="submit">SPEEL!
+                    </button>
 
+                    <audio id="mySound" src="images/SlotMachine.mp3"></audio>
+                    <audio id="alertSound" src="images/game-level-complete.mp3"></audio>
+
+                    <form class="d-flex align-items-center" role="search">
+                        <input type="text" class="form-control  ms-2" id="playerName" placeholder="Geef je naam">
+
+                        <select id="continentSelect" class="form-control rounded ms-2 me-2">
+                            <option value="all">Alle Vlaggen</option>
+                            <option value="europe">Europa</option>
+                            <option value="americas">Amerika</option>
+                            <option value="africa">Afrika</option>
+                            <option value="asia">Azië</option>
+                            <option value="oceania">Oceanië</option>
+                        </select>
+
+                        <label class="form-control ">
+                            <div class="container-fluid">
+                                <div id="timerDisplay">
+                                    <span class="digit" id="hr">00</span>
+                                    <span class="txt">Min</span>
+                                    <span class="digit" id="sec">00</span>
+                                    <span class="txt">Sec</span>
+                                    <span class="digit" id="count"></span>
+                                </div>
+                            </div>
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--QUIZ-->
+<main id="quiz" class="row mt-5 mx-auto">
+        <div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2">
+            <div id="result" class="row border-0 rounded-3 align-items-center bg-secondary-subtle bounce-in-top">
+
+                <!-- Quizinhoud wordt hier toegevoegd door JavaScript -->
+
+            </div>
+        </div>
+</main>
+<!--SCOREBOARD-->
+<section id="highScoreSection" class="row mx-auto">
+            <div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2 mt-5">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">Highscores</h4>
+                    </div>
+                    <div class="card-body bg-warning" id="highScoreBoard">
+                        <!-- Highscores worden hier weergegeven -->
+                    </div>
+                    <button id="resetHighScoreButton" class="btn btn-danger rounded-0">Reset Highscores</button>
+                </div>
+            </div>
+</section>
+
+<script src="js/fcreatec.js"></script>
 </body>
 </html>
