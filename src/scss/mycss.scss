@@ -16,11 +16,13 @@
 html {
   overflow-y: scroll;
 }
+
 body{
   padding-left: 0 !important;
   padding-right: 0 !important;
   background: url("../images/globe3.png") no-repeat center fixed;
-  width: fit-content;
+  background-size: cover;
+  width: fit-content;;
   --after-opacity: 0; /* Standaardwaarde */
   transition: background-image 1s ease-in-out;
 }
@@ -31,6 +33,7 @@ body::after {
   right: 0;
   bottom: 0;
   background: url("../images/globe6a.png") no-repeat center fixed;
+  background-size: cover;
   transition: opacity 1s ease-in-out;
   opacity: var(--after-opacity);
   z-index: -1;

@@ -107,7 +107,7 @@ function displayCountries(countries, number, playerName) {
         </div>`;
     });
 
-    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary ' +
+    resultContainer.innerHTML += '<button id="checkAnswersButton" class=" btn btn-primary ' +
         ' mt-3' +
         ' pulse">Ben je zeker?</button>';
     document.getElementById("checkAnswersButton").addEventListener("click", () => checkAllAnswers(selectedCountries, playerName));
