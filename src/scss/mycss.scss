@@ -50,7 +50,7 @@ body::after {
 /*END NAVBAR*/
 #navbar{
   span{
-    font-family: sogoebi;
+    font-family: sogoebi, serif;
     font-size: 40px;
   }
 }
@@ -245,7 +245,7 @@ body::after {
 }
 @keyframes pulse-animation {
   0% {
-    box-shadow: 0 0 0 0px rgb(23, 142, 161);
+    box-shadow: 0 0 0 0 rgb(23, 142, 161);
   }
   100% {
     box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
