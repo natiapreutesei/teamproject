@@ -33,7 +33,9 @@
             opacity: var(--after-opacity);
             z-index: -1;
         }
-
+        html {
+            overflow-y: scroll;
+        }
 
         .container {  display: grid;
             grid-template-columns: 350px 350px 350px;
@@ -176,18 +178,6 @@
         }
 
 
-        .back-face {
-            display: none; /* Verborgen tot de antwoorden worden gecontroleerd */
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            transform: rotateY(180deg);
-        }
 
         .correct {
             background-color: green;
@@ -196,15 +186,15 @@
         .incorrect {
             background-color: red;
         }
+
         .flex-column {
             flex-direction: column;
         }
         .flex-row {
             flex-direction: column;
         }
-        .subbtn {
-            margin: 14px 0px;
-        }
+
+
         @keyframes typewriter {
             from {width: 0;}
             to {width: 100%;}
@@ -359,18 +349,14 @@
 
         @keyframes pulse-animation {
             0% {
-                box-shadow: 0 0 0 0px rgba(0, 0, 255, 1);
+                box-shadow: 0 0 0 0px rgb(23, 142, 161);
             }
             100% {
-                box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+                box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
             }
         }
 
 
-        .master{
-            color:black;
-            float:right;
-        }
 
         @media (max-width:900px){
             .master{
@@ -380,7 +366,7 @@
         @media (min-width: 768px) { /* Voor middelgrote schermen en groter */
             .country-quiz {
                 flex: 0 0 auto;
-                width: 70%; /* Of een andere breedte naar keuze */
+                width: 50%; /* Of een andere breedte naar keuze */
             }
         }
 
@@ -395,6 +381,19 @@
             text-align: center;
             margin: 0 0 0 0;
             justify-content: center;
+
+        }
+
+        #timerDisplay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 17px;
+            color: #fff;
+            text-align: center;
+            margin: 0 0 0 0;
 
         }
 
@@ -421,12 +420,15 @@
                 <audio id="alertSound" src="images/game-level-complete.mp3"></audio>
 
                 <form class="d-flex align-items-center" role="search">
-                    <input type="text" class="form-control w-50 ms-2" id="playerName" placeholder="Geef jou naam">
+                    <input type="text" class="form-control  ms-2" id="playerName" placeholder="Geef je naam">
 
-                    <select id="continentSelect" class="form-control w-50 rounded ms-2 me-2">
+                    <select id="continentSelect" class="form-control rounded ms-2 me-2">
                         <option value="all">Alle Vlaggen</option>
                         <option value="europe">Europa</option>
                         <option value="americas">Amerika</option>
+                        <option value="africa">Afrika</option>
+                        <option value="asia">Azië</option>
+                        <option value="oceania">Oceanië</option>
                     </select>
 
                     <label class="form-control ">
