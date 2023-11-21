@@ -1,6 +1,6 @@
 /*FONTS*/
 @font-face{
- src: url("../fonts/Segoe UI Bold.woff");
+  src: url("../fonts/Segoe UI Bold.woff");
   font-family: "sogoeuib";
 }
 @font-face{
@@ -79,6 +79,67 @@ body::after {
   transform: scale(1.1); /* Vergroot de vlag naar 110% van zijn grootte */
   animation: ease-in-out;
 }
+
+#result {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Zorgt voor gelijkmatige ruimte tussen de cards */
+}
+
+.flag-container {
+  width: 100%;
+  padding-top: 56.25%; /* Verhouding van 16:9 */
+  position: relative;
+}
+
+.flag-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Rest van de kaart-stijlen blijven hetzelfde */
+
+
+.card.country-card {
+  width: 30%; /* Breedte van de card aanpassen */
+  height: 320px; /* Vaste hoogte voor alle cards */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0); /* Achtergrond met 50% transparantie */
+  overflow: hidden; /* Voorkomt dat de inhoud buiten de kaart stroomt */
+}
+
+.card-img-container {
+  width: 100%;
+  height: 60%; /* Hoogte voor de afbeelding container */
+  position: relative;
+}
+
+.card-img-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  height: 10%; /* Hoogte voor het onderste deel van de kaart */
+
+  overflow-y: auto; /* Voegt scroll toe indien nodig */
+  padding: 15px;
+}
+
+.form-check {
+  margin-bottom: 10px;
+}
+
+
 .correct {
   background-color: green;
 }
@@ -120,10 +181,16 @@ body::after {
   to { opacity: 1; }
 }
 .fade-in {
-  animation: fadeIn 2.5s ease-in forwards;
+  animation: fadeIn 2s ease-in forwards;
 }
 .fade-in-later {
-  animation: fadeIn 1s ease-in 2s forwards; /* Begint na een vertraging van 2 seconden */
+  animation: fadeIn 1s ease-in 1s forwards; /* Begint na een vertraging van 2 seconden */
+}
+
+.jello-horizontal2 {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
+  animation-delay: 1s;
 }
 
 .jello-horizontal {
@@ -234,10 +301,7 @@ body::after {
   }
 }
 
-.slide-in-fwd-center {
-  -webkit-animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
+
 
 .pulse {
   animation: pulse-animation 2s infinite;
@@ -251,6 +315,42 @@ body::after {
     box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
   }
 }
+
+.zoomIn {
+  -webkit-animation-name: zoomIn;
+  animation-name: zoomIn;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-delay: 0.5s;
+}
+@-webkit-keyframes zoomIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.card.country-card {
+  /* andere stijlen */
+  box-shadow: none; /* Dit verwijdert de schaduw */
+}
+
 /*END ANIMATIONS*/
 
 /*FROM HERE WE WORK DESKTOP ORIENTED W/ MEDIA QUERY'S*/
@@ -260,4 +360,106 @@ body::after {
   }
 }
 
+/* Standaard stijlen voor kaarten en containers */
+#result {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
+}
+
+.card.country-card {
+  width: 30%; /* Breedte op grotere schermen */
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* Stack flag and body vertically */
+}
+
+.flag-container {
+  width: 100%;
+  padding-top: 70%; /* Verhouding voor de vlag */
+  position: relative;
+}
+
+.flag-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  flex-grow: 1; /* Laat de body groeien om resterende ruimte te vullen */
+}
+
+.form-check {
+  margin-bottom: 10px;
+  color: #fae6bd;
+}
+
+/* Media query voor mobiele apparaten */
+@media (max-width: 768px) {
+  .card.country-card {
+    width: 100%; /* Kaarten nemen de volledige breedte van het scherm in */
+    margin: 10px 0; /* Marges alleen boven en onder */
+  }
+  #checkAnswersButton{
+    width: 200px;
+  }
+
+  .flag-container {
+    padding-top: 50%; /* Aangepaste verhouding voor mobiele apparaten */
+    width: 100%;
+    position: relative;
+  }
+
+  .flag-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .form-check {
+    font-size: 0.9em; /* Kleinere tekstgrootte voor radio buttons */
+  }
+}
+
+
+/* Media query voor mobiele apparaten */
+@media (max-width: 368px) {
+  .card.country-card {
+    width: 100%; /* Kaarten nemen de volledige breedte van het scherm in */
+    margin: 10px 0; /* Marges alleen boven en onder */
+  }
+  #checkAnswersButton{
+
+    width: 200px;
+  }
+
+  .flag-container {
+    padding-top: 50%; /* Aangepaste verhouding voor mobiele apparaten */
+    width: 100%;
+    position: relative;
+  }
+
+  .flag-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .form-check {
+    font-size: 0.9em; /* Kleinere tekstgrootte voor radio buttons */
+  }
+}

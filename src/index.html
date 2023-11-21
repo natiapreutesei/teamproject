@@ -24,7 +24,10 @@
                     </button>
 
                     <audio id="mySound" src="images/SlotMachine.mp3"></audio>
-                    <audio id="alertSound" src="images/game-level-complete.mp3"></audio>
+                    <audio id="radioButtonSound" src="images/clickbutton.mp3"></audio>
+                    <audio id="checkAnswersSound" src="images/notification.mp3"></audio>
+
+
 
                     <form class="d-flex align-items-center" role="search">
                         <input type="text" class="form-control  ms-2" id="playerName" placeholder="Geef je naam">
@@ -57,27 +60,27 @@
 </header>
 <!--QUIZ-->
 <main id="quiz" class="row mt-5 mx-auto">
-        <div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2">
-            <div id="result" class="row border-0 rounded-3 align-items-center bg-secondary-subtle bounce-in-top">
+    <div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2">
+        <div id="result" class="row border-0 rounded-3 align-items-center bg-secondary-subtle bounce-in-top">
 
-                <!-- Quizinhoud wordt hier toegevoegd door JavaScript -->
+            <!-- Quizinhoud wordt hier toegevoegd door JavaScript -->
 
-            </div>
         </div>
+    </div>
 </main>
 <!--SCOREBOARD-->
 <section id="highScoreSection" class="row mx-auto">
-            <div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2 mt-5">
-                <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <h4 class="mb-0">Highscores</h4>
-                    </div>
-                    <div class="card-body bg-warning" id="highScoreBoard">
-                        <!-- Highscores worden hier weergegeven -->
-                    </div>
-                    <button id="resetHighScoreButton" class="btn btn-danger rounded-0">Reset Highscores</button>
-                </div>
+    <div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2 mt-5">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Highscores</h4>
             </div>
+            <div class="card-body bg-warning" id="highScoreBoard">
+                <!-- Highscores worden hier weergegeven -->
+            </div>
+            <button id="resetHighScoreButton" class="btn btn-danger rounded-0">Reset Highscores</button>
+        </div>
+    </div>
 </section>
 
 <script src="js/fcreatec.js"></script>

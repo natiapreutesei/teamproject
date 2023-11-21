@@ -1,8 +1,9 @@
 function startGame() {
     correctAnswers = 0; // Reset het aantal correcte antwoorden
-    playSound(); // Speel een geluid af (indien nodig).
+    playSound(); // Speel een geluid af (klikgeluid radiobuttons en weet je zeker button).
     startTimer(); // Start de timer.
     generateCountries(); // Start het spel.
+    playStartSound() // Startgeluid en backgroundtransitie.
 }
 
 let startTime;
@@ -91,31 +92,38 @@ function displayCountries(countries, number, playerName) {
     selectedCountries.forEach((country, i) => {
         let options = generateRandomOptions(countries, country.name.common);
         let optionsHtml = options.map((option, index) =>
-            `<div class="form-check fade-in">
-                <input  class="form-check-input " type="radio" name="countryOption_${i}" id="option_${i}_${index}" value="${option}">
-          
-                <label class="form-check-label" for="option_${i}_${index}">
+            `<div class="form-check">
+                <input class="form-check-input zoomIn" type="radio" name="countryOption_${i}" id="option_${i}_${index}" value="${option}">
+                <label class="form-check-label fade-in" for="option_${i}_${index}">
                     ${option}
                 </label>
             </div>`).join('');
 
-
         resultContainer.innerHTML += `
-        <div class="col-md-6 col-lg-4 d-flex flex-column" id="countryQuiz_${i}">
-            <div class=" bounce-in-top flag-img text-center align-self-center">
-                <div class="jello-horizontal">
-                        <img src="${country.flags.png}" class="card-img-top flag-img center" alt="Flag of ${country.name.common}">
+            <div class="card country-card border-0">
+                <div class="flag-container bounce-in-top jello-horizontal">
+                    <img src="${country.flags.png}" class="flag-image" alt="Flag of ${country.name.common}">
                 </div>
-            </div>
-            <div class="options align-self-center">${optionsHtml}</div>
-        </div>`;
+                <div class="options-container mt-2">
+                    ${optionsHtml}
+                </div>
+            </div>`;
     });
 
-    resultContainer.innerHTML += '<button id="checkAnswersButton" class="w-25 btn btn-primary ' +
-        ' mt-3 mx-auto' +
-        ' pulse">Ben je zeker?</button>';
+    resultContainer.innerHTML += '<button id="checkAnswersButton" class="btn btn-primary mt-3 w-25 mx-auto' +
+        '  pulse">Ben je' +
+        ' zeker?</button>';
     document.getElementById("checkAnswersButton").addEventListener("click", () => checkAllAnswers(selectedCountries, playerName));
+    document.querySelectorAll('.form-check-input').forEach(radioButton => {
+        radioButton.addEventListener('click', () => playSound('radioButtonSound'));
+    });
+
+    document.getElementById("checkAnswersButton").addEventListener('click', () => playSound('checkAnswersSound'));
+
+
 }
+
+
 
 function generateRandomOptions(countries, correctOption) {
     let options = [correctOption];
@@ -250,8 +258,24 @@ function resetHighScores() {
     localStorage.setItem('highScores', JSON.stringify(highScores));
 }
 
-function playSound() {
+function playStartSound() {
     var sound = document.getElementById("mySound");
-    sound.play();
-    document.body.style.setProperty('--after-opacity', '1');
+    if (sound) {
+        sound.play();
+        document.body.style.setProperty('--after-opacity', '1');
+    } else {
+        console.error("Geluidselement niet gevonden: mySound");
+    }
 }
+
+function playSound(soundId) {
+    var sound = document.getElementById(soundId);
+    if (sound) {
+        sound.play();
+    } else {
+        console.error("Geluidselement niet gevonden: " + soundId);
+    }
+}
+
+
+
