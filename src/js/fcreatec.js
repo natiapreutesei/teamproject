@@ -1,10 +1,17 @@
 function startGame() {
+    let playerName = document.getElementById("playerName").value;
+    if (!playerName) {
+        alert("Naam ingeven is verplicht!");
+        return; // Stop de functie als er geen naam is ingevoerd
+    }
+
     correctAnswers = 0; // Reset het aantal correcte antwoorden
     playSound(); // Speel een geluid af (klikgeluid radiobuttons en weet je zeker button).
     startTimer(); // Start de timer.
     generateCountries(); // Start het spel.
     playStartSound() // Startgeluid en backgroundtransitie.
 }
+
 
 let startTime;
 let timerInterval;
